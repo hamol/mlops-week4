@@ -28,24 +28,16 @@ jobs:
     - name: Run tests
       run: |
         python test.py
-    - name: Generate diff
+    - name: Make or detect changes
       run: |
-      echo '```
-      git diff metrics.csv >> diff_output.txt
-      echo '```' >> diff_output.txt
-      echo "diff_body<<EOF" >> $GITHUB_OUTPUT
-      cat diff_output.txt >> $GITHUB_OUTPUT
-      echo "EOF" >> $GITHUB_OUTPUT
-
+        # Example: build documentation or modify files
+        echo "Automating PR to main branch"
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         base: main
         branch: ${{ github.head_ref }}
-        title: "Automated PR to main"
-        body: |
-          This pull request includes the following changes:
-
-          ${{ steps.diff.outputs.diff_body }}
-
+        title: "Automated Pull Request to Main"
+        body: "This pull request was created automatically via GitHub Actions."
+        commit-message: "chore: auto-create PR to main"
