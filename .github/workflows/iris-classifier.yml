@@ -41,3 +41,4 @@ jobs:
         title: "Automated PR main"
         body: "This PR was created automatically via GitHub Actions."
         commit-message: "Chore: auto-create PR to main"
+        draft: true
