@@ -3,11 +3,10 @@ name: Iris Classifier
 on:
   push:
     branches: [ "dev" ]
-  pull_request:
-    branches: [ "dev" ]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   build:
@@ -28,10 +27,12 @@ jobs:
     - name: Run tests
       run: |
         python test.py
-    - name: Make or detect changes
-      run: |
-        # Example: build documentation or modify files
-        echo "Automating PR to main branch"
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
