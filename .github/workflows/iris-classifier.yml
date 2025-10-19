@@ -1,7 +1,7 @@
 name: Iris Classifier
 
 on:
-  merge:
+  pull_request:
     branches: [ "main" ]
 
 permissions:
