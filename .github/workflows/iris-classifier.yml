@@ -25,7 +25,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Run Tests
+    - name: Run tests
       run: |
         python test.py
+    - name: Generate diff
+      run: |
+      echo '```
+      git diff metrics.csv >> diff_output.txt
+      echo '```' >> diff_output.txt
+      echo "diff_body<<EOF" >> $GITHUB_OUTPUT
+      cat diff_output.txt >> $GITHUB_OUTPUT
+      echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        base: main
+        branch: ${{ github.head_ref }}
+        title: "Automated PR to main"
+        body: |
+          This pull request includes the following changes:
+
+          ${{ steps.diff.outputs.diff_body }}
 
