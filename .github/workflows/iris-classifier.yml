@@ -1,18 +1,15 @@
 name: Iris Classifier
 
 on:
-  push:
-    branches: [ "dev" ]
+  merge:
+    branches: [ "main" ]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.12.3
@@ -27,18 +24,3 @@ jobs:
     - name: Run tests
       run: |
         python test.py
-
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v6
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        branch: "main"
-        title: "Automated PR main"
-        body: "This PR was created automatically via GitHub Actions."
-        commit-message: "Chore: auto-create PR to main"
-        draft: true
