@@ -1,7 +1,7 @@
 name: Iris Classifier
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 permissions:
