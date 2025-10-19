@@ -30,6 +30,7 @@ jobs:
     - name: Run Tests
       run: |
         git checkout dev
+        dvc pull
         dvc checkout
         python test.py
 
