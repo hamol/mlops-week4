@@ -36,8 +36,8 @@ jobs:
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        base: main
-        branch: ${{ github.head_ref }}
-        title: "Automated Pull Request to Main"
-        body: "This pull request was created automatically via GitHub Actions."
-        commit-message: "chore: auto-create PR to main"
+        base: "main"
+        branch: "dev"
+        title: "Automated PR main"
+        body: "This PR was created automatically via GitHub Actions."
+        commit-message: "Chore: auto-create PR to main"
