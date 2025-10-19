@@ -1,8 +1,7 @@
 name: Iris Classifier
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
 
@@ -10,8 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  on-merge:
-    if: github.event.pull_request.merged == true
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
